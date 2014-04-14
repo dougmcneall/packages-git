@@ -120,8 +120,21 @@ samp.beta <- function(n,mins,maxes,wrt,shape1 = 2,shape2 = 2){
   
 }
 
+
+samp.norm <- function(n, means, sds){
+   # Sample from a normal distribution, and place in
+   # a m = length(mins or maxes) x n matrix.
+ 
+  out <- rnorm(n=length(means)*n, mean=means , sd = sds)
+  dim(out) <- c(length(means),n)
+  rownames(out) <- names(means)
+  return(t(out))
+}
+
+
 samp.unif <- function(n, mins, maxes){
-  # sample from a uniform distribution.
+  # Sample from a uniform distribution, and place in
+  # a m = length(mins or maxes) x n matrix.
   out <- runif(n=length(mins)*n, min=mins , max = maxes)
   dim(out) <- c(length(mins),n)
   rownames(out) <- names(mins)
