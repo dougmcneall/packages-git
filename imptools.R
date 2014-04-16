@@ -4,9 +4,6 @@
 # D.J. McNeall
 # dougmcneall@gmail.com
 
-# ---------------------------------------------------------------------
-# 1. Define implausibility
-# ----------------------------------------------------------------------
 
 impl <- function(em, em.sd, disc, disc.sd, obs, obs.sd){
   # implausibility function
@@ -24,11 +21,11 @@ impl <- function(em, em.sd, disc, disc.sd, obs, obs.sd){
 
 
 # ---------------------------------------------------------------------
-# 2. emulate implausibility using Gaussian Process emulator
+# 2. 
 # ---------------------------------------------------------------------
 
 emulate.implausibility.gp <- function(X, y, y.target, B, n.em, disc = 0, disc.sd = 0, obs.sd = 0, X.em = NULL){
-  # Emulate to map an input space with a plausibility measure 
+  # Emulate implausibility using Gaussian Process emulator 
   # Inputs:
   # X
   # y
@@ -83,3 +80,17 @@ emulate.implausibility.gp <- function(X, y, y.target, B, n.em, disc = 0, disc.sd
   
 }
 
+
+prop.thres <- function(x, thres, above = FALSE){
+  # propotion of vector x below a threshold thres
+  n <- length(x)
+
+  if(above) bt <- length(x[x > thres])
+  
+  else bt <- length(x[x < thres])
+
+  prop <- bt/n
+  
+  prop
+  
+}
