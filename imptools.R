@@ -19,13 +19,37 @@ impl <- function(em, em.sd, disc, disc.sd, obs, obs.sd){
 }
 
 
+impl.dk <- function(X, y, y.target, X.test, disc = 0, disc.sd = 0, obs.sd = 0){
+  # Basic Gaussian process (DiceKriging) implausibility function
+  
+  fit <- km(design = X, response = y)
+  
+  pred <- predict(fit, newdata = X.test, type = 'UK')
+  
+  impl.em <- impl(em = pred$mean,
+		                    em.sd = pred$sd,
+		                    disc = disc,
+		                    disc.sd = disc.sd,
+		                    obs = y.target,
+		                    obs.sd = obs.sd
+		                 )
+  
+  return(list(X.test = X.test,
+              pred = pred,
+              impl.em = impl.em
+              )
+         )
+}
+
+
 
 # ---------------------------------------------------------------------
 # 2. 
 # ---------------------------------------------------------------------
 
 emulate.implausibility.gp <- function(X, y, y.target, B, n.em, disc = 0, disc.sd = 0, obs.sd = 0, X.em = NULL){
-  # Emulate implausibility using Gaussian Process emulator 
+  # Emulate implausibility using Gaussian Process emulator
+  # Deprecated (in effect replaced by 
   # Inputs:
   # X
   # y
