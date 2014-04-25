@@ -20,7 +20,9 @@ impl <- function(em, em.sd, disc, disc.sd, obs, obs.sd){
 
 
 impl.dk <- function(X, y, y.target, X.test, disc = 0, disc.sd = 0, obs.sd = 0){
-  # Basic Gaussian process (DiceKriging) implausibility function
+  # Basic Gaussian process (DiceKriging) to find the implausibility of
+  # points in matrix X.test, given emulator built on relationship between
+  # X and y, and observation y.target
   
   fit <- km(design = X, response = y)
   
@@ -40,6 +42,55 @@ impl.dk <- function(X, y, y.target, X.test, disc = 0, disc.sd = 0, obs.sd = 0){
               )
          )
 }
+
+
+create.loo.list <- function(X, y, X.test, disc, disc.sd, obs.sd){
+  # Create a list of objects, each one of which is
+  # a leave-one-out replication. impl.dk.list can be used
+  # on the resultant output
+  
+  n <- nrow(X)
+  
+  list.out <- vector(mode = 'list', length = n)
+
+  for(i in 1:n){
+
+    obj <- NULL
+    
+    obj$X.test <- X.test
+    obj$X <- X[-i, ]
+    obj$y <- y[-i]
+    obj$y.target <- y[i]
+    obj$disc <- disc
+    obj$disc.sd <- disc.sd
+    obj$obs.sd  <- obs.sd
+
+    list.out[[i]] <- obj
+  }
+
+  list.out
+
+}
+
+
+impl.dk.list <- function(impl.obj){
+  # Wrapper for impl.dk so that it works on objects. Use
+  # to take advantage of parallelisation in mclapply
+  # The object should contain everything that impl.dk needs
+  
+  out <- impl.dk(X = impl.obj$X,
+                 y = impl.obj$y,
+                 y.target = impl.obj$y.target,
+                 X.test = impl.obj$X.test,
+                 disc = impl.obj$disc,
+                 disc.sd = impl.obj$disc.sd,
+                 obs.sd = impl.obj$obs.sd)
+  out
+}
+
+
+
+
 
 
 
