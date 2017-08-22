@@ -142,7 +142,7 @@ samp.unif <- function(n, mins, maxes){
 }
 
 
-taat.design <- function(design, n, means = NULL){
+taat.design <- function(X, n, means = NULL){
   # Build a two at a time emulator design
   # hold all of the other parameters at their mid values
 
