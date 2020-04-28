@@ -127,7 +127,7 @@ dfunc.up.truth = function(x,y, dfunc.col = blues9, col = 'black', bg = 'red', ce
   
   xdash <- head(x, -1)
   ydash <- head(y, -1)
-  
+    
   kde <- kde2d(xdash,ydash)
   image(kde, col = dfunc.col, add = TRUE)
   points(xtrue, ytrue, pch = pch, col = col, bg = bg, cex =cex)
