@@ -116,7 +116,7 @@ dfunc.up <- function(x, y, dfunc.col = greys, ...){
   image(kde, col = dfunc.col, add = TRUE)
 }
 
-
+  
 dfunc.up.truth = function(x,y, dfunc.col = blues9, col = 'black', bg = 'red', cex = 1.5, pch = 21, ...){
   # function for plotting 2d kernel density estimates in pairs() plot,
   # adding a data point overlay in the last row of the input matrix.
