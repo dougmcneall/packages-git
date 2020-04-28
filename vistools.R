@@ -1,24 +1,25 @@
 # a collection of useful R code functions (mostly plotting)
 # By Doug McNeall
+# @dougmcneall
 # dougmcneall@gmail.com
 
-# 1. pairs.aug
+# pairs.aug
 # Multiple pairs plot on the same axes
 
-# 2. dfunc
+# dfunc
 # Helper function for pairs - plots density of points
 
-# 3. cplot
+# cplot
 # scatter plot with colour as a third dimension
 
-# 4. cpoints
+# cpoints
 # more generic scatter plot with colour as a third dimension
 
-# 5. cpointsTruth 
+# cpointsTruth 
 # helper function for diagonal panel in pairs()
 # plot points in colour palette, and the last point in a different colour
 
-# 6. cplotShort
+# cplotShort
 # scatter plot with colour
 # as a third dimension (no legend, for small plots)
 
